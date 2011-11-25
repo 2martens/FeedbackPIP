@@ -81,12 +81,7 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
         parent::__construct($installation);
         $this->completeTableName = 'wcf'.WCF_N.'_'.$this->tableName;
         $this->readFormParameters();
-        try {
-            $this->validate();
-        } catch (UserInputException $uie) {
-            $this->errorField = $uie->getField();
-            $this->errorType = $uie->getType();
-        }
+        
     }
     
     /**
@@ -122,13 +117,14 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
      * @see AbstractPackageInstallationPlugin::uninstall()
      */
     public function uninstall() {
-        $this->readData();
+        $this->show();
+        
         if ($this->once) {
             $this->sendFeedback();
             parent::uninstall();
             return;
         }
-        $this->show();
+        
     }
     
     /**
@@ -144,6 +140,15 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
      * Reads data from the database.
      */
     protected function readData() {
+        if (count($_POST)) {
+            $this->readFormParameters();
+            try {
+                if ($this->once) $this->validate();
+            } catch (UserInputException $uie) {
+                $this->errorField = $uie->getField();
+                $this->errorType = $uie->getType();
+            }
+        }
         $sql = 'SELECT email, subject, userEmailOptional
         		FROM '.$this->completeTableName.'
         		WHERE packageID = '.intval($this->installation->getPackageID());
@@ -192,6 +197,7 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
      * Shows the template.
      */
     protected function show() {
+        $this->readData();
         $this->assignVariables();
         WCF::getTPL()->display('packageFeedback');
         exit;
