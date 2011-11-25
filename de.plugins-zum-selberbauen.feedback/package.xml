@@ -14,7 +14,7 @@
         <isunique>1</isunique>        
         
         <!-- version specific entries -->
-        <version>1.0.0 Beta 3</version>
+        <version>1.0.0 Beta 5</version>
         <date>2011-11-25</date>
     </packageinformation>
     
@@ -41,7 +41,7 @@
         <!-- database -->
         <sql>install.sql</sql>
     </instructions>
-    <instructions type="update" fromversion="1.0.0 Beta 2">
+    <instructions type="update" fromversion="1.0.0 Beta 4">
         <!-- pips -->
         <packageinstallationplugins>pips.tar</packageinstallationplugins>
     </instructions>

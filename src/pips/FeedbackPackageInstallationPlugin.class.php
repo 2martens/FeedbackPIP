@@ -73,6 +73,13 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
     protected $userEmailOptional = true;
     
     /**
+     * Contains the subject of the email.
+     *
+     * @var String
+     */
+    protected $subject = '';
+    
+    /**
      * Creates a new FeedbackPackageInstallationPlugin object.
      *
      * @param PackageInstallationQueue $installation
