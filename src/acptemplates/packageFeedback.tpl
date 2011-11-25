@@ -7,7 +7,7 @@
             <p>{lang}wcf.acp.package.feedback.description{/lang}</p>
             
             <div class="inner">
-               <textarea class="inputText" id="feedback" name="feedback" onclick="empty()">{lang}wcf.acp.package.feedback.insert{/lang}</textarea>
+               <textarea class="inputText" id="feedback" name="feedback" rows="20" onclick="empty()">{lang}wcf.acp.package.feedback.insert{/lang}</textarea>
             </div>
             
             <input type="hidden" name="queueID" value="{@$queueID}" />
