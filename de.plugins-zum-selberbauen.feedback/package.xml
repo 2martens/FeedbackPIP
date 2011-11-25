@@ -24,8 +24,12 @@
     </authorinformation>
     
     <requiredpackages>
-        <requiredpackage>com.woltlab.wcf</requiredpackage> <!-- minversion has to be added later -->
+        <requiredpackage minversion="1.1.0">com.woltlab.wcf</requiredpackage>
     </requiredpackages>
+    
+    <excludedpackages>
+        <excludedpackage version="2.0.0*">com.woltlab.wcf</excludedpackage>
+    </excludedpackages>
     
     <instructions type="install">
         <!-- templates -->
@@ -33,5 +37,8 @@
         
         <!-- pips -->
         <packageinstallationplugins>pips.tar</packageinstallationplugins>
+        
+        <!-- database -->
+        <sql>install.sql</sql>
     </instructions>
 </package>
