@@ -200,8 +200,11 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
     protected function show() {
         $this->readData();
         $this->assignVariables();
-        WCF::getTPL()->display('packageFeedback');
-        exit;
+        if (!$this->once) {
+            WCF::getTPL()->display('packageFeedback');
+            exit;
+        }
+        else return;
     }
     
     /**
