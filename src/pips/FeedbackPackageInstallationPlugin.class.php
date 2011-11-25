@@ -222,11 +222,12 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
      */
     protected function sendFeedback() {
         require_once(WCF_DIR.'lib/data/mail/Mail.class.php');
-        $header = 'Reply-To: '.$this->userEmail;
         $mail = new Mail($this->email, $this->subject, $this->feedback);
-        $mail->setHeader($header);
+        if (!empty($this->userEmail)) {
+            $header = 'Reply-To: '.$this->userEmail;
+            $mail->setHeader($header);
+        }
         $mail->send();
         parent::uninstall();
-        echo 'Test';
     }
 }
