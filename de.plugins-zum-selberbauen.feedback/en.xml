@@ -6,6 +6,8 @@
         <item name="wcf.acp.package.step.uninstall.FeedbackPackageInstallationPlugin"><![CDATA[Show feedback form...]]></item>
         <item name="wcf.acp.package.feedback"><![CDATA[Feedback]]></item>
         <item name="wcf.acp.package.feedback.description"><![CDATA[Please give a short feedback.]]></item>
-        <item name="wcf.acp.package.feedback.insert"><![CDATA[Please insert here your feedback.]]></item>
+        <item name="wcf.acp.package.feedback.email"><![CDATA[Your email-address]]></item>
+        <item name="wcf.acp.package.feedback.text"><![CDATA[Your feedback]]></item>
+        <item name="wcf.acp.package.feedback.error"><![CDATA[Sorry, an error occured.]]></item>
     </category>
 </language>
