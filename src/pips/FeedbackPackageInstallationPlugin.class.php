@@ -50,7 +50,7 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
     public function install() {
         parent::install();
         $feedbackTag = $this->installation->getXMLTag($this->tagName);
-        $email = StringUtil::trim($feedbackTag['attrs']['email']);
+        $email = StringUtil::trim($feedbackTag['email']);
         $subject = StringUtil::trim($feedbackTag['cdata']);
         //checks whether this is an installation or an update
         if ($this->installation->getAction() == 'install') {
