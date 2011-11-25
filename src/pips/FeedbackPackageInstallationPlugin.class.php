@@ -140,19 +140,6 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
      * Reads data from the database.
      */
     protected function readData() {
-        if (count($_POST)) {
-            $this->readFormParameters();
-            try {
-                if ($this->once) {
-                    $this->validate();
-                    $this->sendFeedback();
-                }
-            } catch (UserInputException $uie) {
-                $this->errorField = $uie->getField();
-                $this->errorType = $uie->getType();
-                $this->once = false;
-            }
-        }
         $sql = 'SELECT email, subject, userEmailOptional
         		FROM '.$this->completeTableName.'
         		WHERE packageID = '.intval($this->installation->getPackageID());
@@ -160,6 +147,20 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
         $this->email = StringUtil::trim($row['email']);
         $this->subject = StringUtil::trim($row['subject']);
         $this->userEmailOptional = (boolean) StringUtil::trim($row['userEmailOptional']);
+        if (count($_POST)) {
+            $this->readFormParameters();
+            try {
+                if ($this->once) {
+                    $this->validate();
+                    $this->sendFeedback();
+                    return;
+                }
+            } catch (UserInputException $uie) {
+                $this->errorField = $uie->getField();
+                $this->errorType = $uie->getType();
+                $this->once = false;
+            }
+        }
     }
     
     /**
@@ -168,18 +169,16 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
      * @throws UserInputException
      */
     protected function validate() {
+        if (!$this->userEmailOptional) {
+            if (empty($this->userEmail)) {
+                throw new UserInputException('userEmail');
+            } elseif (!$this->validateEmail($this->userEmail)) {
+                throw new UserInputException('userEmail', 'notValid');
+            }
+        }
         if (empty($this->feedback)) {
             throw new UserInputException('feedback');
         }
-        
-        if ($this->userEmailOptional) return;
-        
-        if (empty($this->userEmail)) {
-            throw new UserInputException('userEmail');
-        } elseif (!$this->validateEmail($this->userEmail)) {
-            throw new UserInputException('userEmail', 'notValid');
-        }
-        
     }
     
     /**
@@ -223,10 +222,11 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
      */
     protected function sendFeedback() {
         require_once(WCF_DIR.'lib/data/mail/Mail.class.php');
-        $header = 'Reply-To: '.$this->userEmail.Mail::$crlf;
+        $header = 'Reply-To: '.$this->userEmail;
         $mail = new Mail($this->email, $this->subject, $this->feedback);
         $mail->setHeader($header);
         $mail->send();
         parent::uninstall();
+        echo 'Test';
     }
 }

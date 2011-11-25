@@ -52,8 +52,6 @@
     //<![CDATA[
     window.onload = function() {
     changeHeight();
-    var text = document.getElementById("feedback");
-    text.focus();
 };
 	parent.showWindow(true);
     parent.setCurrentStep('{lang}wcf.acp.package.step.title{/lang}{lang}wcf.acp.package.step.{if $action == 'rollback'}uninstall{else}{@$action}{/if}.{@$step}{/lang}');
