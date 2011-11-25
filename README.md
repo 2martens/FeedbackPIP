@@ -6,7 +6,7 @@ This package is useful for developers to aquire feedback from their customers du
 Version notes
 -------------
 
-The currently available source code represents an early beta-version of FeedbackPIP.
+The currently available source code represents the final version 1.0.0 of FeedbackPIP.
 
 Contribution
 ------------
