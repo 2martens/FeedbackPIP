@@ -118,13 +118,7 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
      */
     public function uninstall() {
         $this->show();
-        
-        if ($this->once) {
-            $this->sendFeedback();
-            parent::uninstall();
-            return;
-        }
-        
+        parent::uninstall();
     }
     
     /**
@@ -143,7 +137,10 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
         if (count($_POST)) {
             $this->readFormParameters();
             try {
-                if ($this->once) $this->validate();
+                if ($this->once) {
+                    $this->validate();
+                    $this->sendFeedback();
+                }
             } catch (UserInputException $uie) {
                 $this->errorField = $uie->getField();
                 $this->errorType = $uie->getType();
@@ -204,7 +201,6 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
             WCF::getTPL()->display('packageFeedback');
             exit;
         }
-        else return;
     }
     
     /**
