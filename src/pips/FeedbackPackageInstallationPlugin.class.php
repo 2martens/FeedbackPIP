@@ -147,6 +147,7 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
             } catch (UserInputException $uie) {
                 $this->errorField = $uie->getField();
                 $this->errorType = $uie->getType();
+                $this->once = false;
             }
         }
         $sql = 'SELECT email, subject, userEmailOptional
