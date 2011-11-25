@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language languagecode="de" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/language.xsd">
+    <category name="wcf.acp.package">
+        <item name="wcf.acp.package.step.install.FeedbackPackageInstallationPlugin"><![CDATA[Speichert Feedback-Adressdaten...]]></item>
+        <item name="wcf.acp.package.step.update.FeedbackPackageInstallationPlugin"><![CDATA[Aktualisiert Feedback-Adressdaten...]]></item>
+        <item name="wcf.acp.package.step.uninstall.FeedbackPackageInstallationPlugin"><![CDATA[Zeigt Feedback-Formular...]]></item>
+        <item name="wcf.acp.package.feedback"><![CDATA[Feedback]]></item>
+        <item name="wcf.acp.package.feedback.description"><![CDATA[Bitte geben Sie ein kurzes Feedback.]]></item>
+        <item name="wcf.acp.package.feedback.insert"><![CDATA[Bitte tippen Sie hier Ihr Feedback ein.]]></item>
+    </category>
+</language>
