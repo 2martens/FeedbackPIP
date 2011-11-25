@@ -41,4 +41,7 @@
         <!-- database -->
         <sql>install.sql</sql>
     </instructions>
+    <instructions type="update" fromversion="1.0.0 RC 1">
+    
+    </instructions>
 </package>
