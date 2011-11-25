@@ -7,7 +7,7 @@
             <p>{lang}wcf.acp.package.feedback.description{/lang}</p>
             
             <div class="inner">
-               <textarea class="inputText" name="feedback">{lang}wcf.acp.package.feedback.insert{/lang}</textarea>
+               <textarea class="inputText" id="feedback" name="feedback" onclick="empty()">{lang}wcf.acp.package.feedback.insert{/lang}</textarea>
             </div>
             
             <input type="hidden" name="queueID" value="{@$queueID}" />
@@ -30,7 +30,13 @@
     window.onload = function() {
     changeHeight();
 };
-
+	var once = false;
+	function empty() {
+		if (once) return;
+		var text = document.getElementById("feedback");
+		text.value = "";
+		once = true;
+	}
     parent.showWindow(true);
     parent.setCurrentStep('{lang}wcf.acp.package.step.title{/lang}{lang}wcf.acp.package.step.{if $action == 'rollback'}uninstall{else}{@$action}{/if}.{@$step}{/lang}');
     //]]>
