@@ -99,7 +99,9 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
         $feedbackTag = $this->installation->getXMLTag($this->tagName);
         $this->email = StringUtil::trim($feedbackTag['email']);
         $this->subject = StringUtil::trim($feedbackTag['cdata']);
-        $this->userEmailOptional = (boolean) intval($feedbackTag['userEmailOptional']);
+        if (isset($feedbackTag['userEmailOptional'])) {
+            $this->userEmailOptional = (boolean) intval($feedbackTag['userEmailOptional']);
+        }
         
         //checks whether this is an installation or an update
         if ($this->installation->getAction() == 'install') {
