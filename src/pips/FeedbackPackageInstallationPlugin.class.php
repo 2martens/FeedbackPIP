@@ -52,11 +52,19 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
         $feedbackTag = $this->installation->getXMLTag($this->tagName);
         $email = StringUtil::trim($feedbackTag['attrs']['email']);
         $subject = StringUtil::trim($feedbackTag['cdata']);
-        $sql = 'INSERT INTO '.$this->completeTableName.'
-        	(packageID, email, subject)
-        	VALUES ('.intval($this->installation->getPackageID()).', '.
-                    escapeString($email).', '.escapeString($subject).')';
-        WCF::getDB()->sendQuery($sql);
+        //checks whether this is an installation or an update
+        if ($this->installation->getAction() == 'install') {
+            $sql = 'INSERT INTO '.$this->completeTableName.'
+        				(packageID, email, subject)
+        			VALUES ('.intval($this->installation->getPackageID()).', '.
+                        escapeString($email).', '.escapeString($subject).')';
+            WCF::getDB()->sendQuery($sql);
+        } elseif ($this->installatio->getAction() == 'update') {
+            $sql = 'UPDATE '.$this->completeTableName.'
+            	SET email = '.escapeString($email).', subject = '.escapeString($subject).'
+            	WHERE packageID = '.intval($this->installation->getPackageID());
+            WCF::getDB()->sendQuery($sql);
+        }
     }
     
     /**
