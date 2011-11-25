@@ -125,7 +125,6 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
      */
     public function uninstall() {
         $this->show();
-        parent::uninstall();
     }
     
     /**
@@ -228,5 +227,6 @@ class FeedbackPackageInstallationPlugin extends AbstractPackageInstallationPlugi
         $mail = new Mail($this->email, $this->subject, $this->feedback);
         $mail->setHeader($header);
         $mail->send();
+        parent::uninstall();
     }
 }
